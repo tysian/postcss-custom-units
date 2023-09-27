@@ -1,0 +1,48 @@
+{
+  "name": "@tysian/postcss-custom-units",
+  "version": "1.0.0",
+  "description": "Custom CSS Units plugin for PostCSS",
+  "homepage": "https://github.com/tysian/postcss-custom-units",
+  "bugs": {
+    "url": "https://github.com/tysian/postcss-custom-units/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tysian/postcss-custom-units.git"
+  },
+  "license": "MIT",
+  "sideEffects": false,
+  "type": "module",
+  "keywords": [
+    "css",
+    "postcss",
+    "postcss-plugin"
+  ],
+  "author": {
+    "name": "Jakub Bazgier",
+    "url": "https://github.com/tysian"
+  },
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "require": "./dist/index.cjs",
+      "import": "./dist/index.mjs"
+    }
+  },
+  "main": "dist/index.cjs",
+  "module": "dist/index.mjs",
+  "types": "dist/index.d.ts",
+  "files": [
+    "dist",
+    "*.d.ts"
+  ],
+  "devDependencies": {
+    "postcss": "^8.4.30",
+    "typescript": "^5.2.2",
+    "unbuild": "^2.0.0"
+  },
+  "scripts": {
+    "build": "unbuild",
+    "stub": "unbuild --stub"
+  }
+}
