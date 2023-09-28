@@ -19,7 +19,7 @@ export interface PostCSSCustomUnitsOptions {
   units: CustomUnit[];
 }
 
-function PostCSSCustomUnits({ units }: PostCSSCustomUnitsOptions) {
+function plugin({ units }: PostCSSCustomUnitsOptions) {
   return {
     postcssPlugin: 'postcss-custom-units',
     Once(root: Root) {
@@ -39,4 +39,6 @@ function PostCSSCustomUnits({ units }: PostCSSCustomUnitsOptions) {
   };
 }
 
-export default PostCSSCustomUnits;
+plugin.postcss = true;
+
+export default plugin;
