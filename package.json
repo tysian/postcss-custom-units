@@ -38,6 +38,7 @@
   ],
   "devDependencies": {
     "@tysian/eslint-config-typescript": "^0.1.1",
+    "bumpp": "^9.2.0",
     "clean-publish": "^4.2.0",
     "eslint": "^8.50.0",
     "eslint-config-prettier": "^9.0.0",
@@ -51,6 +52,8 @@
   },
   "scripts": {
     "build": "unbuild",
-    "stub": "unbuild --stub"
+    "stub": "unbuild --stub",
+    "prepublishOnly": "npm run build",
+    "bump": "bumpp"
   }
 }
