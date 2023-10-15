@@ -1,29 +1,31 @@
-import type { Root } from 'postcss';
+import type { Plugin, PluginCreator, Root } from 'postcss';
 import { parseCSSUnitValue } from './utils/parseCSSUnitValue';
 
-export interface CustomUnit {
-  /**
-   * Base unit
-   *
-   * 1customunit = 1baseunit
-   * @example
-   * ```scss
-   * 1rpx = 0.0625rem
-   * ```
-   */
-  base: string;
-  unit: string;
-}
-
 export interface PostCSSCustomUnitsOptions {
-  units: CustomUnit[];
+  units: {
+    /**
+     * Base unit
+     *
+     * 1custom-unit = 1base-unit
+     * @example
+     * ```css
+     * 1rpx = 0.0625rem
+     * ```
+     */
+    base: string;
+    unit: string;
+  }[];
 }
 
-function plugin({ units }: PostCSSCustomUnitsOptions) {
+const postcssCustomUnits: PluginCreator<PostCSSCustomUnitsOptions> = (
+  opts,
+): Plugin => {
+  const options = { units: [], ...opts };
+
   return {
     postcssPlugin: 'postcss-custom-units',
     Once(root: Root) {
-      for (const { base, unit } of units) {
+      for (const { base, unit } of options.units) {
         const baseParsed = parseCSSUnitValue(base);
         if (!baseParsed) continue;
         const { value: baseValue, unit: baseUnit } = baseParsed;
@@ -32,13 +34,13 @@ function plugin({ units }: PostCSSCustomUnitsOptions) {
         root.replaceValues(
           tester,
           { fast: unit },
-          (str: string) => `${parseFloat(str) * baseValue}${baseUnit}`
+          (str: string) => `${parseFloat(str) * baseValue}${baseUnit}`,
         );
       }
     },
   };
-}
+};
 
-plugin.postcss = true;
+postcssCustomUnits.postcss = true;
 
-export default plugin;
+export default postcssCustomUnits;

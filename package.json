@@ -51,7 +51,6 @@
   },
   "scripts": {
     "build": "unbuild",
-    "stub": "unbuild --stub",
-    "publish": "clean-publish"
+    "stub": "unbuild --stub"
   }
 }
