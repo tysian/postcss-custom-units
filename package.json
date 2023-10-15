@@ -1,6 +1,6 @@
 {
   "name": "@tysian/postcss-custom-units",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "description": "Custom CSS Units plugin for PostCSS",
   "homepage": "https://github.com/tysian/postcss-custom-units",
   "bugs": {
