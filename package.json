@@ -1,62 +1,41 @@
 {
-  "name": "@tysian/postcss-custom-units",
-  "version": "0.1.2",
-  "description": "Custom CSS Units plugin for PostCSS",
-  "homepage": "https://github.com/tysian/postcss-custom-units",
-  "bugs": {
-    "url": "https://github.com/tysian/postcss-custom-units/issues"
-  },
-  "repository": {
-    "type": "git",
-    "url": "https://github.com/tysian/postcss-custom-units.git"
-  },
-  "license": "MIT",
-  "sideEffects": false,
+  "name": "@tysian/postcss-plugins",
   "type": "module",
-  "keywords": [
-    "css",
-    "postcss",
-    "postcss-plugin"
-  ],
-  "author": {
-    "name": "Jakub Bazgier",
-    "url": "https://github.com/tysian"
-  },
-  "exports": {
-    ".": {
-      "types": "./dist/index.d.ts",
-      "require": "./dist/index.cjs",
-      "import": "./dist/index.mjs"
-    }
-  },
-  "main": "dist/index.cjs",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
-  "files": [
-    "dist",
-    "*.d.ts"
-  ],
-  "devDependencies": {
-    "@tysian/eslint-config-typescript": "^0.1.1",
-    "bumpp": "^9.2.0",
-    "clean-publish": "^4.2.0",
-    "eslint": "^8.50.0",
-    "eslint-config-prettier": "^9.0.0",
-    "postcss": "^8.4.31",
-    "prettier": "^3.0.3",
-    "typescript": "^5.2.2",
-    "unbuild": "^2.0.0",
-    "vite": "^4.4.11",
-    "vitest": "^0.34.6"
-  },
-  "peerDependencies": {
-    "postcss": "^8.0.0"
+  "version": "0.0.0",
+  "private": true,
+  "packageManager": "pnpm@10.18.2",
+  "engines": {
+    "node": "^18.20.8 || ^20.3.0 || >=22.0.0"
   },
   "scripts": {
-    "build": "unbuild",
-    "stub": "unbuild --stub",
-    "prepublishOnly": "npm run build",
-    "bump": "bumpp",
-    "test": "vitest run"
+    "build": "pnpm run -r build",
+    "dev": "pnpm run -r dev",
+    "lint": "eslint --cache .",
+    "prepublishOnly": "pnpm run build",
+    "bump": "pnpm run -r bump",
+    "release": "pnpm run -r release",
+    "test": "vitest",
+    "typecheck": "tsc --noEmit",
+    "prepare": "simple-git-hooks"
+  },
+  "devDependencies": {
+    "@antfu/eslint-config": "^5.4.1",
+    "bumpp": "^10.3.1",
+    "eslint": "^9.37.0",
+    "eslint-config-prettier": "^10.1.8",
+    "lint-staged": "^16.2.4",
+    "postcss": "^8.5.6",
+    "prettier": "^3.6.2",
+    "simple-git-hooks": "^2.13.1",
+    "tsdown": "^0.15.6",
+    "typescript": "^5.9.3",
+    "vite": "^7.1.9",
+    "vitest": "^3.2.4"
+  },
+  "simple-git-hooks": {
+    "pre-commit": "pnpm i --frozen-lockfile --ignore-scripts --offline && npx lint-staged"
+  },
+  "lint-staged": {
+    "*": "eslint --fix"
   }
 }

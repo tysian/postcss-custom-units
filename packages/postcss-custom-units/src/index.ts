@@ -1,12 +1,12 @@
 import type { Plugin, PluginCreator, Root } from 'postcss';
-import { parseCSSUnitValue } from './utils/parseCSSUnitValue';
+import { parseCSSUnitValue } from './utils/parse-css-unit-value';
 
 export interface PostCSSCustomUnitsOptions {
   units: {
     /**
      * Base unit
      *
-     * 1custom-unit = 1base-unit
+     * custom-unit = 1base-unit
      * @example
      * ```css
      * 1rpx = 0.0625rem
@@ -18,7 +18,7 @@ export interface PostCSSCustomUnitsOptions {
 }
 
 const postcssCustomUnits: PluginCreator<PostCSSCustomUnitsOptions> = (
-  opts,
+  opts
 ): Plugin => {
   const options = { units: [], ...opts };
 
@@ -34,7 +34,7 @@ const postcssCustomUnits: PluginCreator<PostCSSCustomUnitsOptions> = (
         root.replaceValues(
           tester,
           { fast: unit },
-          (str: string) => `${parseFloat(str) * baseValue}${baseUnit}`,
+          (str: string) => `${Number.parseFloat(str) * baseValue}${baseUnit}`
         );
       }
     },

@@ -14,7 +14,7 @@ export function parseCSSUnitValue(string: string): CSSUnitValueLike | null {
   }
 
   return {
-    value: parseFloat(value),
+    value: Number.parseFloat(value),
     unit: unit.toString(),
   };
 }
