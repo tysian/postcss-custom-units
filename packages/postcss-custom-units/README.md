@@ -26,7 +26,7 @@ const pluginOptions = {
 };
 
 postcss([postcssCustomUnits(pluginOptions)]).process(
-  YOUR_CSS /*, processOptions */,
+  YOUR_CSS /*, processOptions */
 );
 ```
 
@@ -38,6 +38,8 @@ Custom unit has two properties:
 
 - base - your **X** unit will be transformed into `X * base` <br />**Example**: if `base` = `4px`, then `5unit` = `20px`
 - unit - the _name_ of your unit
+
+If you are getting float rounding errors, please add a `fixRouding` boolean property to unit.
 
 Here is an example with **1rpx**, where `1rpx` = `1px` but it is transformed into `rem`.
 

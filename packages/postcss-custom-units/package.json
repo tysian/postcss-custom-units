@@ -11,7 +11,7 @@
   "homepage": "https://github.com/tysian/postcss-plugins/packages/postcss-custom-units",
   "repository": {
     "type": "git",
-    "url": "https://github.com/tysian/postcss-plugins.git"
+    "url": "git+https://github.com/tysian/postcss-plugins.git"
   },
   "bugs": {
     "url": "https://github.com/tysian/postcss-plugins/issues"
@@ -24,14 +24,19 @@
   "sideEffects": false,
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
-      "import": "./dist/index.mjs",
-      "require": "./dist/index.cjs"
+      "import": {
+        "types": "./dist/index.d.ts",
+        "default": "./dist/index.js"
+      },
+      "require": {
+        "types": "./dist/index.d.cts",
+        "default": "./dist/index.cjs"
+      }
     }
   },
-  "main": "dist/index.cjs",
-  "module": "dist/index.mjs",
-  "types": "dist/index.d.ts",
+  "main": "./dist/index.cjs",
+  "module": "./dist/index.js",
+  "types": "./dist/index.d.ts",
   "files": [
     "*.d.ts",
     "dist"
