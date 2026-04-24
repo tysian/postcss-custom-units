@@ -14,6 +14,8 @@ export interface PostCSSCustomUnitsOptions {
      */
     base: string;
     unit: string;
+    /** Set this to `true` if you are getting weird output when rounding floats */
+    fixRounding?: boolean;
   }[];
 }
 
@@ -25,16 +27,22 @@ const postcssCustomUnits: PluginCreator<PostCSSCustomUnitsOptions> = (
   return {
     postcssPlugin: 'postcss-custom-units',
     Once(root: Root) {
-      for (const { base, unit } of options.units) {
+      for (const { base, unit, fixRounding = false } of options.units) {
         const baseParsed = parseCSSUnitValue(base);
         if (!baseParsed) continue;
         const { value: baseValue, unit: baseUnit } = baseParsed;
 
         const tester = new RegExp(`((\\d+)?\\.)?\\d+${unit}`, 'g');
+        const pf = Number.parseFloat;
+        const parse = (str: string): number => {
+          if (fixRounding) return pf(pf(`${pf(str) * baseValue}`).toFixed(3));
+          return pf(str) * baseValue;
+        };
+
         root.replaceValues(
           tester,
           { fast: unit },
-          (str: string) => `${Number.parseFloat(str) * baseValue}${baseUnit}`
+          (str: string) => `${parse(str)}${baseUnit}`
         );
       }
     },

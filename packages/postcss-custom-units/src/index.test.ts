@@ -15,9 +15,27 @@ it('transform 16rpx to 1rem', () => {
       ],
     }),
   ])
-    .process(RAW_CSS, {
-      from: undefined,
-    })
+    .process(RAW_CSS, { from: undefined })
+    .then((res) => {
+      expect(res.css).toBe(EXPECTED_CSS);
+    });
+});
+
+it('transform 24rpx to 2.4rem', () => {
+  const RAW_CSS = 'body {font-size: 24rpx}';
+  const EXPECTED_CSS = 'body {font-size: 2.4rem}';
+  postcss([
+    postcssCustomUnits({
+      units: [
+        {
+          base: '0.1rem',
+          unit: 'rpx',
+          fixRounding: true,
+        },
+      ],
+    }),
+  ])
+    .process(RAW_CSS, { from: undefined })
     .then((res) => {
       expect(res.css).toBe(EXPECTED_CSS);
     });
